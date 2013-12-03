@@ -28,6 +28,35 @@ function ImageProcessor(inputfolder, outputfolder, sizes){
 
 util.inherits(ImageProcessor, EventEmitter);
 
+ImageProcessor.prototype.resize = function(inpath, outpath, size, done){
+	async.series([
+		function(nextstep){
+
+			im.resize({
+				srcPath:inpath,
+				dstPath:outpath,
+				quality:0.8,
+				format:'png',
+				height:size.height
+			}, nextstep)
+			
+		},
+
+		function(nextstep){
+
+			im.crop({
+				srcPath:outpath,
+				dstPath:outpath,
+				quality:0.8,
+				format:'png',
+				width:size.width,
+				height:size.height
+			}, nextstep)
+			
+		}
+	], done)
+}
+
 ImageProcessor.prototype.process = function(done){
 	var self = this;
 
@@ -52,32 +81,8 @@ ImageProcessor.prototype.process = function(done){
 				})
 			}
 
-			async.series([
-				function(nextstep){
+			self.resize(inpath, outpath, size, nextsize);
 
-					im.resize({
-						srcPath:inpath,
-						dstPath:outpath,
-						quality:0.8,
-						format:'png',
-						height:size.height
-					}, nextstep)
-					
-				},
-
-				function(nextstep){
-
-					im.crop({
-						srcPath:outpath,
-						dstPath:outpath,
-						quality:0.8,
-						format:'png',
-						width:size.width,
-						height:size.height
-					}, nextstep)
-					
-				}
-			], nextsize)
 		}, nextfile)
 		
 
