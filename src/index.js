@@ -14,16 +14,8 @@ var im = require('imagemagick');
 
 module.exports = ImageProcessor;
 
-function ImageProcessor(inputfolder, outputfolder, sizes){
-	EventEmitter.call(this);
-
-	if(!fs.existsSync(inputfolder)){
-		throw new Error(inputfolder + ' does not exist');
-	}
-
-	this.sizes = sizes;
-	this.inputfolder = inputfolder;
-	this.outputfolder = outputfolder;
+function ImageProcessor(){
+	EventEmitter.call(this);	
 }
 
 util.inherits(ImageProcessor, EventEmitter);
@@ -57,12 +49,14 @@ ImageProcessor.prototype.resize = function(inpath, outpath, size, done){
 	], done)
 }
 
-ImageProcessor.prototype.process = function(done){
+ImageProcessor.prototype.folder = function(inputfolder, outputfolder, sizes, done){
 	var self = this;
 
-	var sizes = this.sizes;
-	
-	var files = fs.readdirSync(this.inputfolder);
+	if(!fs.existsSync(inputfolder)){
+		throw new Error(inputfolder + ' does not exist');
+	}
+
+	var files = fs.readdirSync(inputfolder);
 
 	async.forEach(files, function(file, nextfile){
 		if(!file.match(/\.(png|jpg)$/i)){
