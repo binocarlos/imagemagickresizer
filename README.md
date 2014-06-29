@@ -5,20 +5,33 @@ A node library to resize images using ImageMagick
 
 ## usage
 
-```js
-var Resizer = require('imagemagickresizer');
+Resize a folder of images and write to a new folder.
 
-var resize = new Resizer('./imgs', './output', [{
+Each image is resized multiple times.
+
+```js
+var resize = require('imagemagickresizer')()
+
+resize.folder('./imgs', './output', [{
   width:1024,
   height:768
 },{
   width:102,
   height:77,
   name:'thumb'
-}])
-
-resize.process(function(){
+}], function(){
 	console.log('images resized!');
+})
+```
+
+Resize a single image and control what size the output is written at:
+
+```js
+resize.image('./imgs/balloon.jpg', './output/balloon.jpg', {
+	width:600,
+	height:400
+}, function(err){
+	console.log('image is resized')
 })
 ```
 

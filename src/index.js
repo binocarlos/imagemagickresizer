@@ -1,18 +1,8 @@
-/*
-
-	Story Time Island Page Model
-
-	keeps track of a single page and the data needed for it's audio, text and elements
-	
-*/
-
 var EventEmitter = require('events').EventEmitter;
 var fs = require('fs');
 var util = require('util');
 var async = require('async');
 var im = require('imagemagick');
-
-module.exports = ImageProcessor;
 
 function ImageProcessor(){
 	EventEmitter.call(this);	
@@ -20,7 +10,7 @@ function ImageProcessor(){
 
 util.inherits(ImageProcessor, EventEmitter);
 
-ImageProcessor.prototype.resize = function(inpath, outpath, size, done){
+ImageProcessor.prototype.image = function(inpath, outpath, size, done){
 	async.series([
 		function(nextstep){
 
@@ -81,4 +71,8 @@ ImageProcessor.prototype.folder = function(inputfolder, outputfolder, sizes, don
 		
 
 	}, done)
+}
+
+module.exports = function(){
+	return new ImageProcessor()
 }
