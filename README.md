@@ -3,6 +3,18 @@ imagemagickresizer
 
 A node library to resize images using ImageMagick
 
+## install
+
+You need imagemagick on your machine.
+
+For Windows - download the [ImageMaigck Installer](http://www.imagemagick.org/script/binary-releases.php#windows)
+
+For Linux:
+
+```
+$ sudo apt-get install imagemagick
+```
+
 ## usage
 
 Resize a folder of images and write to a new folder.
