@@ -3,6 +3,8 @@ imagemagickresizer
 
 A node library to resize images using ImageMagick
 
+you need [ImageMagick](http://www.imagemagick.org/) on your system
+
 ## install
 
 You need imagemagick on your machine.
