@@ -1,6 +1,6 @@
 {
   "name": "imagemagickresizer",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A node library to resize images using ImageMagick",
   "main": "src/index.js",
   "scripts": {
