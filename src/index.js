@@ -49,15 +49,16 @@ ImageProcessor.prototype.folder = function(inputfolder, outputfolder, sizes, don
 	var files = fs.readdirSync(inputfolder);
 
 	async.forEach(files, function(file, nextfile){
+
 		if(!file.match(/\.(png|jpg)$/i)){
 			nextfile();
 			return;
 		}
 
-		var inpath = self.inputfolder + '/' + file;
+		var inpath = inputfolder + '/' + file;
 
 		async.forEach(sizes, function(size, nextsize){
-			var outpath = self.outputfolder + '/' + file;
+			var outpath = outputfolder + '/' + file;
 
 			if(size.name){
 				outpath = outpath.replace(/\.(\w+)$/, function(match, ext){
