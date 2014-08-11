@@ -65,7 +65,7 @@ ImageProcessor.prototype.folder = function(inputfolder, outputfolder, sizes, don
 				})
 			}
 
-			self.resize(inpath, outpath, size, nextsize);
+			self.image(inpath, outpath, size, nextsize);
 
 		}, nextfile)
 		
